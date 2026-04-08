@@ -45,14 +45,90 @@
       "role": "citizen",
       "avatar": "EC",
       "joined": "2026-04-08"
+    },
+    {
+      "id": "u1775630623080",
+      "name": "Dev Citizen User",
+      "email": "dev-google-citizen@local.dev",
+      "password": "",
+      "role": "citizen",
+      "avatar": "",
+      "joined": "2026-04-08",
+      "googleId": "dev-google-citizen",
+      "authProvider": "google"
+    },
+    {
+      "id": "u1775631542264",
+      "name": "Geetha",
+      "email": "2400032440@kluniversity.in",
+      "password": "sunny@2206",
+      "role": "citizen",
+      "avatar": "G",
+      "joined": "2026-04-08"
     }
   ],
   "issues": [
     {
+      "id": "i1775640841528736",
+      "title": "Test issue for persistence",
+      "category": "Infrastructure",
+      "description": "This issue confirms realistic server-side shaping and persistence.",
+      "status": "open",
+      "priority": "high",
+      "authorId": "u1",
+      "authorName": "Alice Chen",
+      "createdAt": "2026-04-08",
+      "responses": [],
+      "votes": 0,
+      "flagged": false
+    },
+    {
+      "id": "i1775634452114479",
+      "title": "Test issue for persistence",
+      "category": "Infrastructure",
+      "description": "This issue confirms realistic server-side shaping and persistence.",
+      "status": "open",
+      "priority": "high",
+      "authorId": "u1",
+      "authorName": "Alice Chen",
+      "createdAt": "2026-04-08",
+      "responses": [],
+      "votes": 0,
+      "flagged": false
+    },
+    {
+      "id": "i1775633779884688",
+      "title": "Test issue for persistence",
+      "category": "Infrastructure",
+      "description": "This issue confirms realistic server-side shaping and persistence.",
+      "status": "open",
+      "priority": "high",
+      "authorId": "u1",
+      "authorName": "Alice Chen",
+      "createdAt": "2026-04-08",
+      "responses": [],
+      "votes": 0,
+      "flagged": false
+    },
+    {
+      "flagged": false,
+      "id": "ui1775653283475",
+      "createdAt": "2026-04-08",
+      "votes": 3,
+      "category": "Infrastructure",
+      "description": "Created from automated smoke test to confirm persistence.",
+      "authorName": "Alice Chen",
+      "authorId": "u1",
+      "responses": [],
+      "status": "open",
+      "title": "UI persistence test issue",
+      "priority": "low"
+    },
+    {
       "flagged": false,
       "id": "smoke1775623795372",
       "createdAt": "2026-04-08",
-      "votes": 1,
+      "votes": 11,
       "category": "Infrastructure",
       "description": "Smoke test description to validate live backend write path.",
       "authorName": "Admin User",
@@ -164,6 +240,39 @@
     }
   ],
   "updates": [
+    {
+      "id": "up177564084155667",
+      "title": "Allowed politician update",
+      "content": "Politician can publish updates.",
+      "authorId": "u2",
+      "authorName": "Sen. James Ward",
+      "createdAt": "2026-04-08",
+      "category": "Community",
+      "likes": 0,
+      "comments": []
+    },
+    {
+      "id": "up1775634796825805",
+      "title": "Politician update ok",
+      "content": "This should pass role policy and persist.",
+      "authorId": "u2",
+      "authorName": "Sen. James Ward",
+      "createdAt": "2026-04-08",
+      "category": "Community",
+      "likes": 0,
+      "comments": []
+    },
+    {
+      "id": "up177563445218856",
+      "title": "Allowed politician update",
+      "content": "Politician can publish updates.",
+      "authorId": "u2",
+      "authorName": "Sen. James Ward",
+      "createdAt": "2026-04-08",
+      "category": "Community",
+      "likes": 0,
+      "comments": []
+    },
     {
       "id": "up1",
       "title": "Budget Allocation for Infrastructure",
