@@ -13,7 +13,7 @@ import { fileURLToPath } from 'node:url'
 import { readDb, writeDb, withoutPassword } from './db.js'
 
 const app = express()
-const PORT = globalThis.process?.env?.PORT || 4000
+const PORT = globalThis.process?.env?.BACKEND_PORT || globalThis.process?.env?.PORT || 4000
 const JWT_SECRET = globalThis.process?.env?.JWT_SECRET || 'citizen-connect-dev-secret'
 const SESSION_SECRET = globalThis.process?.env?.SESSION_SECRET || 'citizen-connect-session-secret'
 const FRONTEND_URL = globalThis.process?.env?.FRONTEND_URL || 'http://localhost:5173'
@@ -302,6 +302,10 @@ function buildDiscussionPayload(body, user) {
   }
 }
 
+app.get('/', (_req, res) => {
+  res.json({ ok: true, service: 'citizen-connect-backend', health: '/api/health' })
+})
+
 app.get('/api/health', (_req, res) => {
   res.json({ ok: true, date: new Date().toISOString() })
 })
@@ -388,8 +392,13 @@ if (GOOGLE_AUTH_ENABLED) {
 app.post('/api/auth/login', authLimiter, (req, res) => {
   const { email, password } = req.body || {}
   const cleanEmail = String(email || '').trim().toLowerCase()
+  const cleanPassword = String(password || '').trim()
   const db = readDb()
-  const found = db.users.find(u => u.email.toLowerCase() === cleanEmail && u.password === password)
+  const found = db.users.find((u) => {
+    const userEmail = String(u.email || '').trim().toLowerCase()
+    const userPassword = String(u.password || '').trim()
+    return userEmail === cleanEmail && userPassword === cleanPassword
+  })
   if (!found) return res.status(401).json({ error: 'Invalid email or password.' })
 
   const user = withoutPassword(found)
@@ -401,9 +410,10 @@ app.post('/api/auth/signup', authLimiter, (req, res) => {
   const { name, email, password, role } = req.body || {}
   const cleanEmail = String(email || '').trim().toLowerCase()
   const cleanName = String(name || '').trim()
+  const cleanPassword = String(password || '').trim()
 
   if (cleanName.length < 2) return res.status(400).json({ error: 'Please enter your full name.' })
-  if (String(password || '').length < 6) return res.status(400).json({ error: 'Password must be at least 6 characters.' })
+  if (cleanPassword.length < 6) return res.status(400).json({ error: 'Password must be at least 6 characters.' })
   if (!cleanEmail) return res.status(400).json({ error: 'Email is required.' })
 
   const db = readDb()
@@ -415,7 +425,7 @@ app.post('/api/auth/signup', authLimiter, (req, res) => {
     id: 'u' + Date.now(),
     name: cleanName,
     email: cleanEmail,
-    password,
+    password: cleanPassword,
     role: role || 'citizen',
     avatar: cleanName.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase(),
     joined: new Date().toISOString().slice(0, 10),
